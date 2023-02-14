@@ -1,0 +1,102 @@
+
+{% extends "manage_staffing/base.html" %} 
+{% block main %}
+
+<!--
+the context is  {'person':(person, [education], [skills])}
+
+-->
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Dashboard:  Person Identifier: {{person.0.identifier}}</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group me-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+          </div>
+          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <span data-feather="calendar" class="align-text-bottom"></span>
+            This week
+          </button>
+        </div>
+      </div>
+
+      <!-- <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas> -->
+
+      <div class="row">
+        <div class="col-sm-6 col-md-6">
+          <div class="card" >
+            
+            <div class="card-body">
+              <h5 class="card-title">{{person.0.name}}</h5>
+              <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                  <tbody>
+                      <tr><td>Info about the Person</td></tr>          
+                  </tbody>
+                </table>
+              </div>
+              <p class="card-text">Some metrics about the person. Expected salary range, some internal metric to show viability as a candidate.</p>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <h2>Skills</h2>
+      <div class="table-responsive">
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Field</th>
+              <th scope="col">Classification</th>
+              <th scope="col">Expertise Level</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for s in person.2 %} 
+            <tr>
+              <td>#</td>
+              <td>{{s.field.name}}</td>
+              <td>{{s.field.classification.name}}</td>
+              <td>{{s.expertise.level}}</td>
+            </tr>
+
+          {% endfor %}          
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Education</h2>
+      <div class="table-responsive">
+        <table class="table table-striped table-sm">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Level/Degree</th>
+              <th scope="col">Major</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for s in person.1 %} 
+            <tr>
+              <td>#</td>
+              <td>{{s.ed_level.level}}</td>
+              <td>{{s.ed_major.major}}</td>
+            </tr>
+
+          {% endfor %}          
+          </tbody>
+        </table>
+        <p>Maybe list of jobs applied for? Status of application?  Suggested jobs?  Excluded employers?</p>
+      </div>
+
+
+
+
+
+
+    </main>
+ {% endblock %}

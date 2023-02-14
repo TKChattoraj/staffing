@@ -1,0 +1,43 @@
+{% extends 'manage_staffing/base.html' %} 
+
+{% block main %} 
+
+<!--
+    context={'employers': [employer objects]}
+-->
+
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <h2>Employers</h2>
+    <div class="table-responsive">
+      <table class="table table-striped table-sm">
+        <thead>
+          <tr>
+            <th scope="col">Identifier</th>
+            <th scope="col">Name</th>
+            <th scope="col">Status</th>
+            <th scope="col">Action</th>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for e in employers %} <!-- do for each person in personss-->
+          <tr>
+            <td>{{e.identifier}}</td>
+            <td>{{e.name}}</td> 
+            <td>some status</td>                   
+            <td scope="col">
+                <a class="nav-link" href="/manage_staffing/employer/{{e.pk}}" %}>   
+                  Go To
+                  <span data-feather="arrow-right" class="align-text-bottom"></span>
+                </a>
+            </td>
+          </tr>
+          {% endfor %}
+          
+        </tbody>
+      </table>
+    </div>
+</main>
+
+
+{% endblock %} 
