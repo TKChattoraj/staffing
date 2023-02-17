@@ -5,8 +5,8 @@
 {% block main %} 
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
 
-    <h2>Manage_Staffing Log In</h2>
-        <form action="/login/" method="post">
+    <h3>Please Log In</h3>
+        <form action="/login_user/" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Log In</button>

@@ -58,20 +58,12 @@ def login_user(request):
             return render(request, 'manage_staffing/login.html',{'form': form})
 
 
-def show_login_form(request):
-    return render(request, 'manage_staffing/login.html')
-
-
-@login_required
+@login_required()
 def logout_user(request):
     logout(request)
     return render(request, 'manage_staffing/logout.html')
 
-
-
-
-
-@login_required
+@login_required()
 def persons(request):
     #get and show list of persons
     persons=Person.persons_context() # return a list of persons
