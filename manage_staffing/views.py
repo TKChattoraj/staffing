@@ -7,6 +7,8 @@ from django.core import serializers
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 
+from manage_staffing.forms import LogInForm
+
 
 from manage_staffing.models import (
     Ed_Major,
@@ -29,17 +31,36 @@ def index(request):
     print(request.user)
     return render(request, 'manage_staffing/index.html')
 
+
 def login_user(request):
-    print("login post")
-    print(request)
-    username=request.POST['username']
-    password=request.POST['password']
-    user=authenticate(request, username=username, password=password)
-    if user is not None:
-        login(request, user)
-        return render(request, 'manage_staffing/')
+    print('login request')
+    print(request.method)
+    if request.method=='POST':
+        print("login post")
+        print(request.POST)
+        username=request.POST['username']
+        password=request.POST['password']
+        print(f'username: {username}')
+        print(f'password: {password}')
+        user=authenticate(request, username=username, password=password)
+        if user is not None:
+            print("We made a user")
+            login(request, user)
+            return render(request, 'manage_staffing/index.html')
+        else:
+            print("no user made")
+            form=LogInForm()
+            return render(request, 'manage_staffing/login.html')
+    
     else:
-        return render(request, 'manage_staffing/login.html')
+            print("Going for the view")
+            form=LogInForm()
+            return render(request, 'manage_staffing/login.html',{'form': form})
+
+
+def show_login_form(request):
+    return render(request, 'manage_staffing/login.html')
+
 
 @login_required
 def logout_user(request):

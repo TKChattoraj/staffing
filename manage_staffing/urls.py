@@ -13,5 +13,6 @@ urlpatterns = [
     path('job/<int:pk>', views.job),
     path('accounts/', include('django.contrib.auth.urls')),
     path('logout/', views.logout_user),
-    path('login/', views.login_user)
+    path('login/', views.login_user),
+    path('login_user/', views.login_user)
 ]
